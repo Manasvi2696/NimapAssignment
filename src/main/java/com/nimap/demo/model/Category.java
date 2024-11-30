@@ -24,9 +24,6 @@ public class Category {
 	@Column(name = "description")
 	private String description;
 	
-//	@OneToMany(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "product_id")
-//	private List<Product> product;
 
 	public long getId() {
 		return id;
@@ -52,18 +49,6 @@ public class Category {
 		this.description = description;
 	}
 
-//	public List<Product> getProduct() {
-//		return product;
-//	}
-//
-//	public void setProduct(List<Product> product) {
-//		this.product = product;
-//	}
-//
-//	@Override
-//	public String toString() {
-//		return "Category [id=" + id + ", name=" + name + ", description=" + description + ", product=" + product + "]";
-//	}
 
 	
 	@Override
