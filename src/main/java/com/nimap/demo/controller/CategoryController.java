@@ -3,6 +3,8 @@ package com.nimap.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.nimap.demo.exception.CategoryNotFoundException;
+import com.nimap.demo.exception.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +41,8 @@ public class CategoryController {
 		if(category.isPresent()) {
 			return ResponseEntity.ok(category.get());
 		}else {
-			return ResponseEntity.notFound().build();
+			throw new CategoryNotFoundException("Category with id : "+id+" is not found");
+			//return ResponseEntity.notFound().build();
 		}
 	}
 	
@@ -60,7 +63,8 @@ public class CategoryController {
 			categoryService.deletebyId(id);
 			return ResponseEntity.noContent().build();
 		}else {
-			return ResponseEntity.notFound().build();
+			throw new CategoryNotFoundException("Category with id : "+id+" is not found");
+			//return ResponseEntity.notFound().build();
 		}
 	}
 }
