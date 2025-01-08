@@ -3,6 +3,7 @@ package com.nimap.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.nimap.demo.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,8 @@ public class ProductController {
 		if(product.isPresent()) {
 			return ResponseEntity.ok(product.get());
 		}else {
-			return ResponseEntity.notFound().build();
+			throw new ProductNotFoundException("Product with id : "+id+" is not found");
+			//return ResponseEntity.notFound().build();
 		}
 	}
 	
@@ -60,7 +62,8 @@ public class ProductController {
 			productservice.deletebyId(id);
 			return ResponseEntity.noContent().build();
 		}else {
-			return ResponseEntity.notFound().build();
+			throw new ProductNotFoundException("Product with id : "+id+" is not found");
+			//return ResponseEntity.notFound().build();
 		}
 	}
 

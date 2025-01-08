@@ -3,6 +3,7 @@ package com.nimap.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.nimap.demo.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -37,9 +38,8 @@ public class ProductService {
         return productrepository.findById(id).map(product -> {
             product.setName(productDetails.getName());
             product.setPrice(productDetails.getPrice());
-            //categoryrepository.findById(categoryId).ifPresent(product::setCategory);
             return productrepository.save(product);
-        }).orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+        }).orElseThrow(() -> new ProductNotFoundException("Product with id : "+id+" is not found"));
     }
 	
 	public void deletebyId(long id) {
